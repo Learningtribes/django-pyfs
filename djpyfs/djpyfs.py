@@ -133,7 +133,10 @@ def get_s3fs(namespace):
 
     if 'prefix' in DJFS_SETTINGS:
         fullpath = os.path.join(DJFS_SETTINGS['prefix'], fullpath)
-    s3fs = S3FS(DJFS_SETTINGS['bucket'], fullpath, aws_secret_access_key=key_secret, aws_access_key_id=key_id)
+    s3fs = S3FS(DJFS_SETTINGS['bucket'], fullpath,
+                aws_secret_access_key=key_secret,
+                aws_access_key_id=key_id,
+                acl=DJFS_SETTINGS.get('acl', None))
 
     def get_s3_url(self, filename, timeout=60):
         """
